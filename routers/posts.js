@@ -35,7 +35,7 @@ router.put("/posts/:postId", async (req, res) => {
     const { postId } = req.params;
     const { title, content, password } = req.body;
 
-    const pass = await Post.find({ password })
+    const pass = await Post.find({ postId: postId, password: password });
     // const passwords = await Post.find({ password: postpass });
 
     if ( !pass.length ){
@@ -50,7 +50,7 @@ router.put("/posts/:postId", async (req, res) => {
 router.delete("/posts/:postId", async (req, res) => {
     const { postId } = req.params;
     const { password } = req.body;
-    const pass = await Post.find({ password })
+    const pass = await Post.find({ postId: postId, password: password });
 
     if ( !pass.length ) {
         res.status(400).json({ errorMessage: "비밀번호가 틀렸습니다." }); 
